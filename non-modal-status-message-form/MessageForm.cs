@@ -37,7 +37,7 @@ namespace non_modal_status_message_form
         }
 
         SemaphoreSlim _loginBusy = new SemaphoreSlim(1, 1);
-        public async Task<bool> SendMessage(IWin32Window owner, string text)
+        public async Task<bool> SendMessageAsync(IWin32Window owner, string text)
         {
             if (!Visible)
             {
@@ -52,7 +52,7 @@ namespace non_modal_status_message_form
             }
             if (!checkBoxUserIsOnline.Checked)
             {
-                await GetCurrentUserStatusMock();
+                await GetCurrentUserStatusAsyncMock();
             }
             if (checkBoxUserIsOnline.Checked)
             {
@@ -65,7 +65,7 @@ namespace non_modal_status_message_form
             return checkBoxUserIsOnline.Checked;
         }
 
-        private async Task<Status> GetCurrentUserStatusMock()
+        private async Task<Status> GetCurrentUserStatusAsyncMock()
         {
             try
             {

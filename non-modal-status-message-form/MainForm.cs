@@ -23,7 +23,7 @@ namespace non_modal_status_message_form
                                 try
                                 {
                                     Enabled = false;
-                                    if(!await MessageForm.SendMessage(this, textBoxSendMessage.Text))
+                                    if(!await MessageForm.SendMessageAsync(this, textBoxSendMessage.Text))
                                     {
                                         BeginInvoke(()=>BringToFront());
                                         BeginInvoke(()=>MessageBox.Show("User is offline"));
