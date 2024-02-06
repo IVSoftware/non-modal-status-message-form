@@ -2,7 +2,7 @@
 
 [![initial][1]][1]
 
-One thing you could experiment with is making the `SendMessage` method awaitable by using a `SemaphoreSlim` in the class.
+Here's a sample implementation for your async Task SendMessage method that uses a `SemaphoreSlim` in the class.
 
 ```csharp
 public partial class MessageForm : Form
