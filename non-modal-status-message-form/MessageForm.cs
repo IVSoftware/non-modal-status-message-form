@@ -13,6 +13,11 @@ using static non_modal_status_message_form.MessageForm;
 
 namespace non_modal_status_message_form
 {
+    enum Status
+    {
+        Offline,
+        Online,
+    }
     public partial class MessageForm : Form
     {
         public MessageForm()
@@ -47,7 +52,7 @@ namespace non_modal_status_message_form
             }
             if (!checkBoxUserIsOnline.Checked)
             {
-                await ExecLogInFlow();
+                await GetCurrentUserStatusMock();
             }
             if (checkBoxUserIsOnline.Checked)
             {
@@ -60,12 +65,13 @@ namespace non_modal_status_message_form
             return checkBoxUserIsOnline.Checked;
         }
 
-        private async Task ExecLogInFlow()
+        private async Task<Status> GetCurrentUserStatusMock()
         {
             try
             {
                 _loginBusy.Wait(0);             // Start awaiter
                 await _loginBusy.WaitAsync();   // Wait for checkbox.checked to be true.
+                return checkBoxUserIsOnline.Checked ? Status.Online : Status.Offline;
             }
             finally
             {
