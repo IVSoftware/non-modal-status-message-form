@@ -31,8 +31,8 @@
             labelMessage = new Label();
             groupBox1 = new GroupBox();
             checkBoxUserIsOnline = new CheckBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            textBoxUserName = new TextBox();
+            textBoxPassword = new TextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,32 +68,32 @@
             checkBoxUserIsOnline.Text = "User Is Online";
             checkBoxUserIsOnline.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // textBoxUserName
             // 
-            textBox3.Font = new Font("Segoe UI", 12F);
-            textBox3.Location = new Point(39, 64);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "User Name";
-            textBox3.Size = new Size(305, 39);
-            textBox3.TabIndex = 4;
+            textBoxUserName.Font = new Font("Segoe UI", 12F);
+            textBoxUserName.Location = new Point(39, 64);
+            textBoxUserName.Name = "textBoxUserName";
+            textBoxUserName.PlaceholderText = "User Name";
+            textBoxUserName.Size = new Size(305, 39);
+            textBoxUserName.TabIndex = 4;
             // 
-            // textBox4
+            // textBoxPassword
             // 
-            textBox4.Font = new Font("Segoe UI", 12F);
-            textBox4.Location = new Point(39, 109);
-            textBox4.Name = "textBox4";
-            textBox4.PasswordChar = '*';
-            textBox4.PlaceholderText = "Password";
-            textBox4.Size = new Size(305, 39);
-            textBox4.TabIndex = 4;
+            textBoxPassword.Font = new Font("Segoe UI", 12F);
+            textBoxPassword.Location = new Point(39, 109);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
+            textBoxPassword.PlaceholderText = "Password";
+            textBoxPassword.Size = new Size(305, 39);
+            textBoxPassword.TabIndex = 4;
             // 
             // MessageForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(478, 266);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
+            Controls.Add(textBoxPassword);
+            Controls.Add(textBoxUserName);
             Controls.Add(groupBox1);
             Controls.Add(labelMessage);
             Name = "MessageForm";
@@ -107,11 +107,9 @@
         #endregion
 
         private Label labelMessage;
-        private TextBox textBox1;
-        private TextBox textBox2;
         private GroupBox groupBox1;
         private CheckBox checkBoxUserIsOnline;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox textBoxUserName;
+        private TextBox textBoxPassword;
     }
 }

@@ -25,6 +25,9 @@ namespace non_modal_status_message_form
                 {
                     _loginBusy.Release();
                 }
+                textBoxUserName.Visible = 
+                textBoxPassword.Visible = 
+                    !checkBoxUserIsOnline.Checked;
             };
         }
 
