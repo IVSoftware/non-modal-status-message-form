@@ -1,6 +1,6 @@
 ﻿namespace non_modal_status_message_form
 {
-    partial class MessageForm
+    partial class MessengerForm
     {
         /// <summary>
         /// Required designer variable.

@@ -1,7 +1,7 @@
 ## Non-model status message form
 [![initial][1]][1]
 
-Here's a sample implementation for your `async Task SendMessageAsync` method that uses a `SemaphoreSlim` in the class.
+Here's a sample implementation for your `async Task SendMessageAsync` method that solves the issue of the MessengerForm now being able to load and that keeps it responsive thoughout including the ability to cancel a login that is inprogress. You stated that "to continue further execution" the user must be logged in, so in that case the main for caller is disabled until the Status is Online.
 
 ```csharp
 enum Status
@@ -9,9 +9,9 @@ enum Status
     Offline,
     Online,
 }
-public partial class MessageForm : Form
+public partial class MessengerForm : Form
 {
-    public MessageForm()
+    public MessengerForm()
     {
         InitializeComponent();
         StartPosition = FormStartPosition.Manual;
@@ -139,7 +139,7 @@ public partial class MainForm : Form
             }
         };
     }
-    private MessageForm MessageForm { get; } = new MessageForm();
+    private MessengerForm MessageForm { get; } = new MessengerForm();
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static non_modal_status_message_form.MessageForm;
+using static non_modal_status_message_form.MessengerForm;
 
 namespace non_modal_status_message_form
 {
@@ -18,9 +18,9 @@ namespace non_modal_status_message_form
         Offline,
         Online,
     }
-    public partial class MessageForm : Form
+    public partial class MessengerForm : Form
     {
-        public MessageForm()
+        public MessengerForm()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.Manual;

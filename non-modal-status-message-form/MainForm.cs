@@ -40,7 +40,7 @@ namespace non_modal_status_message_form
                 }
             };
         }
-        private MessageForm MessageForm { get; } = new MessageForm();
+        private MessengerForm MessageForm { get; } = new MessengerForm();
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
