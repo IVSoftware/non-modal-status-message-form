@@ -15,15 +15,23 @@ namespace non_modal_status_message_form
 {
     public partial class MessageForm : Form
     {
-        public MessageForm() => InitializeComponent();
-
-        public bool SendMessage(IWin32Window owner, string text)
+        public MessageForm()
         {
-            if (!checkBoxUserIsOnline.Checked)
+            InitializeComponent();
+            StartPosition = FormStartPosition.Manual;
+            checkBoxUserIsOnline.CheckedChanged += (sender, e) =>
             {
-                ExecLogInFlow();
-            }
-            if (checkBoxUserIsOnline.Checked)
+                if(checkBoxUserIsOnline.Checked)
+                {
+                    _loginBusy.Release();
+                }
+            };
+        }
+
+        SemaphoreSlim _loginBusy = new SemaphoreSlim(1, 1);
+        public async Task<bool> SendMessage(IWin32Window owner, string text)
+        {
+            if (!Visible)
             {
                 if (owner is Form form)
                 {
@@ -32,7 +40,14 @@ namespace non_modal_status_message_form
                         form.Location.Y
                    );
                 }
-                if (!Visible) Show(owner);
+                Show(owner);
+            }
+            if (!checkBoxUserIsOnline.Checked)
+            {
+                await ExecLogInFlow();
+            }
+            if (checkBoxUserIsOnline.Checked)
+            {
                 BeginInvoke(() =>
                 {
                     labelMessage.Text = text;
@@ -42,11 +57,17 @@ namespace non_modal_status_message_form
             return checkBoxUserIsOnline.Checked;
         }
 
-        private void ExecLogInFlow()
+        private async Task ExecLogInFlow()
         {
-            checkBoxUserIsOnline.Checked = 
-                DialogResult.Yes == 
-                MessageBox.Show(this, "Are you a valid user?", "Log In", MessageBoxButtons.YesNo);
+            try
+            {
+                _loginBusy.Wait(0);             // Start awaiter
+                await _loginBusy.WaitAsync();   // Wait for checkbox.checked to be true.
+            }
+            finally
+            {
+                _loginBusy.Release();
+            }
         }
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -59,7 +80,15 @@ namespace non_modal_status_message_form
                 default:
                     break;
             }
+            Release();
             base.OnFormClosing(e);
+        }
+
+        public void Release()
+        {
+            // Make sure there's something to release.
+            _loginBusy.Wait(0);
+            _loginBusy.Release();
         }
     }
 }

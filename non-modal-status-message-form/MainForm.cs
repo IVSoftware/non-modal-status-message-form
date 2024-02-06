@@ -17,15 +17,17 @@ namespace non_modal_status_message_form
                         e.Handled = e.SuppressKeyPress = true;
                         if (!string.IsNullOrEmpty(textBoxSendMessage.Text))
                         {
-                            BeginInvoke(() =>
+                            BeginInvoke(async () =>
                             {
                                 // Do not block the key event for this.
                                 try
                                 {
                                     Enabled = false;
-                                    if(!MessageForm.SendMessage(this, textBoxSendMessage.Text))
+                                    if(!await MessageForm.SendMessage(this, textBoxSendMessage.Text))
                                     {
+                                        BeginInvoke(()=>BringToFront());
                                         BeginInvoke(()=>MessageBox.Show("User is offline"));
+                                        BeginInvoke(()=>BringToFront());
                                     }
                                 }
                                 finally
